@@ -16,11 +16,9 @@ rep = (lowercase)
 : "0123456789ABCDEF";
 ptr = &buffer[49];
 *ptr = '\0';
-do
-{
+do {
 *--ptr = rep[num % base];
 num /= base;
-}
-while (num != 0);
+} while (num != 0);
 return (ptr);
 }
