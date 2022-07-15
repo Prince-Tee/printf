@@ -3,9 +3,228 @@
 .TH "" "" "" "" ""
 .hy
 .PP
-\&.TH test.sh 1 .SH NAME test.sh \- Print Hello or Bye .SH SYNOPSIS .B
-test.sh [ h ] [ b ] .SH DESCRIPTION .B test.sh This is a sample script
-which does only 2 things.
-It either prints \[lq]Hello\[rq] if argument is `h' or it prints
-\[lq]Bye\[rq] if argument is `b' .SH OPTIONS .TP .BR h Print Hello .TP
-\&.BR b Print Bye
+\&.TH man 3 \[lq]17 March 2019\[rq] \[lq]HOLBERTON SCHOOL\[rq]
+\[dq]_PRINTF\[dq]
+.PP
+\&.SH NAME
+.PP
+\&.B _printf
+.IP \[bu] 2
+formatted output conversion
+.PP
+\&.SH SYNOPSIS
+.PP
+\&.B #include (dqholberton.h(dq
+.PP
+\&.sp
+.PP
+\&.B int _printf(const char *
+.PP
+\&.I format
+.PP
+\&.B , \&...);
+.PP
+\&.SH DESCRIPTION
+.PP
+The function _printf is a variadic function that produces a string
+according to a
+.PP
+\&.I format
+.PP
+and prints it to the standard output, much like the C standard library
+function printf.
+It can receive a variable number of arguments.
+.PP
+This function has been created in the context of a first\-year project
+for Holberton School.
+.PP
+\&.sp
+.PP
+\&.B Return value
+.PP
+\&.sp
+.PP
+On success, _printf returns the number of characters printed.
+If
+.PP
+\&.I format
+.PP
+is NULL or if the functions encounters any errors, it returns \-1.
+.PP
+\&.sp
+.PP
+\&.B Format of the format string
+.PP
+\&.sp
+.PP
+The format string can contain any characters, just like a regular
+string, in double quotes, which will be printed as is.
+For example, _printf((dqHello(dq) will print: Hello.
+.PP
+However, this format string can contain
+.PP
+\&.I conversion specifiers.
+.PP
+These start with a %, and are followed with a character (see
+.PP
+\&.I conversion specifiers
+.PP
+).
+Special characters like a new line are escaped, for example
+_printf((dq\[rs]n(dq) will print a new line.
+.PP
+\&.sp
+.PP
+\&.B Conversion specifiers
+.PP
+\&.sp
+.PP
+These are the characters that specify the type of the variable that
+needs to be printed.
+The variables to be printed are separated from the format string with a
+comma.
+Each variable passed to _printf need to have a conversion specifier.
+.PP
+\&.sp
+.PP
+\&.B i, d
+.IP \[bu] 2
+Both these specifiers are for
+.PP
+\&.I int
+.PP
+arguments.
+They convert the variable to a decimal number, positive or negative.
+.PP
+\&.sp
+.PP
+\&.B c
+.IP \[bu] 2
+Prints a
+.PP
+\&.I single character.
+.PP
+\&.sp
+.PP
+\&.B s
+.IP \[bu] 2
+Prints an entire
+.PP
+\&.I string.
+.PP
+\&.sp
+.PP
+\&.B u
+.IP \[bu] 2
+Prints an
+.PP
+\&.I unsigned int.
+.PP
+\&.sp
+.PP
+\&.B x, X
+.IP \[bu] 2
+Respecively print a number in lowercase and uppercase
+.PP
+\&.I hexadecimal
+.PP
+base.
+.PP
+\&.sp
+.PP
+\&.B o, b
+.IP \[bu] 2
+Respectively print a number in
+.PP
+\&.I octal
+.PP
+and
+.PP
+\&.I binary
+.PP
+base.
+.PP
+\&.sp
+.PP
+\&.B %
+.IP \[bu] 2
+Acts like an escape for the character %.
+To print (dq%(dq, the format string should contain (dq%%(dq.
+.PP
+\&.sp
+.PP
+\&.B r, R
+.IP \[bu] 2
+Respectively print a string in reverse and in ROT13 encryption.
+.PP
+\&.sp
+.PP
+\&.B S
+.IP \[bu] 2
+Prints a string, but non\-printable characters are printed this way:
+\[rs]x, followed by the ASCII code value in uppercase hexadecimal.
+.PP
+\&.sp
+.PP
+\&.B p
+.IP \[bu] 2
+Prints an address, given by a pointer variable
+.PP
+\&.sp
+.PP
+\&.B Flag characters for conversion specifiers
+.PP
+\&.sp
+.PP
+\&.B +
+.IP \[bu] 2
+Prints a plus sign in front of positive signed integers and a minus sign
+in front of negative signed integers.
+.IP \[bu] 2
+overrides a space when both flags are given.
+.PP
+\&.sp
+.PP
+\&.B \[cq] \[cq]
+.IP \[bu] 2
+Prints a space in front of signed integers.
+.PP
+\&.sp
+.PP
+\&.B #
+.IP \[bu] 2
+Modifier for unsigned conversions.
+For x, prepends (dq0x(dq, and for X, prepends (dq0X(dq.
+For o, if the converted number doesn\[cq]t already begin with a 0,
+prepends a 0.
+.PP
+\&.sp
+.PP
+\&.SH SEE ALSO
+.PP
+\&.I printf(3)
+.PP
+\&.I _putchar.c
+.PP
+\&.SH NOTES
+.PP
+_printf uses a custom character printing function called _putchar, that
+uses the system call write().
+.PP
+_putchar uses a static buffer of 1024 bytes and a static incrementing
+variable.
+.PP
+That way, everytime _putchar is called inside _printf, the character is
+stored inside the buffer and the function moves to the next character,
+.PP
+until _printf calls _putchar(\-1), which (dqflushes(dq the buffer and
+resets the incrementing variable to 0.
+.PP
+That way, _putchar only needs to call write one time, passing to it the
+whole buffer and the number of bytes in it, which is given by he value
+of the incrementing variable.
+\&.sp .SH BUGS _printf does not take care of length and precision
+modifiers yet.
+For example, _printf((dq%hx(dq) will not produce the same output asthe
+call to the standard library printf.
+\&.SH AUTHORS Taiwo Adebiyi and OpeyemiOgunfeyintimi, cOHORT 7
